@@ -1,0 +1,68 @@
+<%- include('partials/header'); -%>
+
+<form autocomplete="off">
+    <h2>Sign Up</h2>
+    <label for="firstName">First Name</label>
+    <input type="text" name="firstName" autocomplete="0">
+    <div class="error firstName"></div>
+
+    <label for="lastName">Last Name</label>
+    <input type="text" name="lastName" autocomplete="0">
+    <div class="error lastName"></div>
+
+    <label for="email">Email</label>
+    <input type="text" name="email" >
+    <div class="error email"></div>
+
+    <label for="password">Password</label>
+    <input type="password" name="password" >
+    <div class="error password"></div>
+
+    <button>Sign Up</button>
+</form>
+
+<script>
+    const form = document.querySelector('form');
+    const firstNameError = document.querySelector('.error.firstName')
+    const lastNameError = document.querySelector('.error.lastName')
+    const emailError = document.querySelector('.error.email')
+    const passwordError = document.querySelector('.error.password')
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        firstNameError.textContent = '';
+        lastNameError.textContent = '';
+        emailError.textContent = '';
+        passwordError.textContent = '';
+
+        //get form values
+        const firstName = form.firstName.value;
+        const lastName = form.lastName.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        try {
+            const result = await fetch('/signup', {
+                method: 'POST',
+                body: JSON.stringify({firstName, lastName, email, password}),
+                headers: { 'Content-Type': 'application/json' }
+            });
+            const data = await result.json();
+            console.log(data);
+            if(data.errors){
+                firstNameError.textContent = data.errors.firstName;
+                lastNameError.textContent = data.errors.lastName;
+                emailError.textContent = data.errors.email;
+                passwordError.textContent = data.errors.password;
+            }
+            if(data.user){
+                location.assign('/account')
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    })
+</script>
+
+
+<%- include('partials/footer'); -%>
