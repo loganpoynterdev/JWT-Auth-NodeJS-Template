@@ -1,5 +1,6 @@
 # JWT NodeJS Template
-#### A starter template for creating web apps using NodeJS with JWT authentication and protected routes. Template engine is EJS.
+A starter template for creating web apps using NodeJS with JWT authentication and protected routes. Template engine is EJS.
+
 ---
 
 # Getting Started
