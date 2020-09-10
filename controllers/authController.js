@@ -37,7 +37,7 @@ const handleErrors = (err) => {
 //Create JWT
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-	return jwt.sign({ id }, 'supersecretjwtsigner', {
+	return jwt.sign({ id }, process.env.JWTSECRET, {
 		expiresIn: maxAge,
 	});
 };
