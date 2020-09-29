@@ -17,7 +17,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 // database connection
-const dbURI = 'ATLAS_URL_HERE';
+const dbURI = process.env.ATLAS;
 mongoose
 	.connect(dbURI, {
 		useNewUrlParser: true,
