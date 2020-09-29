@@ -1,9 +1,10 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const authRoutes = require('./routes/authRoutes');
 const { requireAuth, checkUser } = require('./middleware/authMiddleware');
-
 
 const app = express();
 
@@ -16,8 +17,7 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 
 // database connection
-const dbURI =
-	'ATLAS_URL_HERE';
+const dbURI = 'ATLAS_URL_HERE';
 mongoose
 	.connect(dbURI, {
 		useNewUrlParser: true,
@@ -30,7 +30,10 @@ mongoose
 // routes
 app.get('*', checkUser);
 app.get('/', (req, res) => res.render('home'));
-app.get('/account', /*requireAuth*/(req, res) => {
-	res.render('account');
-});
+app.get(
+	'/account',
+	/*requireAuth*/ (req, res) => {
+		res.render('account');
+	}
+);
 app.use(authRoutes);
