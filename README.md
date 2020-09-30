@@ -11,8 +11,9 @@ To get started you will need to complete the following steps:
 `cd JWT-Auth-NodeJS-Template`
 - Install dependencies  
 `npm install`
-- Change the MongoDB Atlas connection in `app.js` on line 19
-- Edit `.env-tempalte` file for JWTSECRET of your choice and rename to `.env`
+- Edit `.env-template` file for ATLAS with your MongoDB Atlas connection string
+- Edit `.env-template` file for JWTSECRET of your choice
+- Renamce `.env-template` to `.env`
 - Open terminal and start the express server with nodemon  
 `nodemon`
 - Visit the app in a browser  
